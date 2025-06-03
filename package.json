@@ -1,0 +1,21 @@
+{
+  "name": "hosting-helper",
+  "version": "1.0.0",
+  "description": "A server that helps you keep your website up to date",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azurioh/hosting-helper.git"
+  },
+  "author": "Alan CUNIN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Azurioh/hosting-helper/issues"
+  },
+  "homepage": "https://github.com/Azurioh/hosting-helper#readme",
+  "workspaces": ["apps/*"],
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "typescript": "^5.8.3"
+  }
+}
