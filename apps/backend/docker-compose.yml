@@ -1,0 +1,62 @@
+x-service-template: &service-template
+  restart: no
+  environment:
+    - NODE_ENV=${NODE_ENV}
+    - DATABASE_URL=${DATABASE_URL}
+  volumes:
+    - ./packages:/_build/packages
+    - ./apps/backend/nodemon.json:/_build/apps/backend/nodemon.json
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  auth:
+    <<: *service-template
+    depends_on:
+      db:
+        condition: service_healthy
+    container_name: auth-${NODE_ENV}
+    image: auth-${NODE_ENV}
+    build:
+      context: ../../
+      dockerfile: apps/backend/.docker/Dockerfile
+      args:
+        SERVICE_NAME: auth
+    volumes:
+      - ./apps/backend/src/micro-services/auth:/app
+    ports:
+      - 3000:3000
+
+  user:
+    <<: *service-template
+    depends_on:
+      db:
+        condition: service_healthy
+    container_name: user-${NODE_ENV}
+    image: user-${NODE_ENV}
+    build:
+      context: ../../
+      dockerfile: apps/backend/.docker/Dockerfile
+      args:
+        SERVICE_NAME: user
+    volumes:
+      - ./apps/backend/src/micro-services/user:/app
+    ports:
+      - 3001:3000
+
+volumes:
+  db_data:
