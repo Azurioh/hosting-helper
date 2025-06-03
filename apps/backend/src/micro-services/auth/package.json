@@ -1,0 +1,7 @@
+{
+	"name": "auth-service",
+	"description": "This is the auth service of the API server",
+	"scripts": {
+		"start": "ts-node index.ts"
+	}
+}
