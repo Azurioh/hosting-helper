@@ -1,0 +1,13 @@
+{
+  "name": "hosting-helper-backend",
+  "description": "This is the backend for the project",
+  "workspaces": ["src/micro-services/*"],
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "fastify": "^5.3.3"
+  }
+}
