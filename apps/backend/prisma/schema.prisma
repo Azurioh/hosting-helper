@@ -1,0 +1,43 @@
+generator client {
+  provider      = "prisma-client"
+  binaryTargets = ["native", "rhel-openssl-3.0.x", "darwin-arm64", "linux-arm64-openssl-3.0.x", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+  output        = "./client"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  passwordHash  String
+
+  webhooks Webhook[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Webhook {
+  id        String   @id @default(uuid())
+  
+  endpoint    String
+  secret      String
+  script      String
+  scriptValid Boolean  @default(true)
+
+  enabled Boolean  @default(true)
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("webhooks")
+}
