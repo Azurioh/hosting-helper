@@ -1,5 +1,5 @@
 {
-  "name": "hosting-helper-local-backend",
+  "name": "webhook-handler-backend",
   "description": "This is the backend for the project",
   "workspaces": ["src/micro-services/*"],
   "devDependencies": {

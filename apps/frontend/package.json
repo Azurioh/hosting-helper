@@ -1,5 +1,5 @@
 {
-  "name": "hosting-helper-local-frontend",
+  "name": "webhook-handler-frontend",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

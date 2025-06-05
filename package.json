@@ -1,18 +1,18 @@
 {
-  "name": "hosting-helper-local",
+  "name": "webhook-handler",
   "version": "1.0.0",
   "description": "A server that helps you keep your website up to date",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azurioh/hosting-helper-local.git"
+    "url": "git+https://github.com/Azurioh/webhook-handler.git"
   },
   "author": "Alan CUNIN",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Azurioh/hosting-helper-local/issues"
+    "url": "https://github.com/Azurioh/webhook-handler/issues"
   },
-  "homepage": "https://github.com/Azurioh/hosting-helper-local#readme",
+  "homepage": "https://github.com/Azurioh/webhook-handler#readme",
   "workspaces": ["apps/*"],
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
