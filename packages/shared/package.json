@@ -1,0 +1,26 @@
+{
+  "name": "@webhook-handler/shared",
+  "version": "1.0.0",
+  "exports": {
+    "./entities/*": "./entities/*.ts",
+    "./enums/*": "./enums/*.ts",
+    "./libs/*": "./libs/*.ts",
+    "./locales/*": "./locales/*.ts",
+    "./plugins/*": "./plugins/*.ts",
+    "./repositories/*": "./repositories/*.ts",
+    "./schemas/*": "./schemas/*.ts",
+    "./services/*": "./services/*.ts",
+    "./utils/*": "./utils/*.ts"
+  },
+  "scripts": {
+    "check:all": "biome check . --diagnostic-level=error",
+    "format:check": "biome format . --diagnostic-level=error",
+    "format:fix": "biome format --write .",
+    "lint:check": "biome lint . --diagnostic-level=error",
+    "typescript:check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@webhook-handler/biome-config": "*",
+    "@webhook-handler/typescript-config": "*"
+  }
+}
