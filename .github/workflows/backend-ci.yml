@@ -1,0 +1,67 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'apps/backend/**'
+  pull_request:
+    paths:
+      - 'apps/backend/**'
+
+jobs:
+  check-style:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/backend
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Biome
+        run: npm install -g @biomejs/biome
+
+      - name: Install backend dependencies
+        run: npm ci
+        working-directory: .
+
+      - name: Check Biome formatting
+        run: biome check --apply .
+        working-directory: apps/backend
+          
+  check-build:
+    needs: check-style
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/backend
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Verify Docker Compose
+        run: docker compose --env-file .env_example config
+
+      - name: Build and verify Docker Compose
+        run: |
+          docker compose --env-file .env_example build
+          docker compose --env-file .env_example up -d
+          sleep 5
+          curl http://localhost:3000/ > /dev/null
+          curl http://localhost:3001/ > /dev/null
+          docker compose --env-file .env_example down

@@ -1,0 +1,66 @@
+name: Packages CI
+
+on:
+  push:
+    paths:
+      - 'packages/**'
+  pull_request:
+    paths:
+      - 'packages/**'
+
+jobs:
+  check-style:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install root dependencies
+        run: npm ci
+        working-directory: packages
+
+      - name: Check Biome formatting
+        run: |
+          npm install -g @biomejs/biome
+          biome check --apply .
+
+  check-build:
+    needs: check-style
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install root dependencies
+        run: npm ci
+        working-directory: packages
+
+      - name: Install TypeScript
+        run: npm install -g typescript
+
+      - name: Check TypeScript compilation
+        run: |
+          for dir in */; do
+            if [ -f "$dir/tsconfig.json" ]; then
+              echo "Checking TypeScript in $dir"
+              tsc --noEmit -p "$dir"
+            fi
+          done
