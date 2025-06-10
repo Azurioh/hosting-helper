@@ -1,0 +1,1 @@
+docker compose --env-file .env.production.local up --build -d
