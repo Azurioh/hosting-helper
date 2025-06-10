@@ -13,7 +13,7 @@
     "url": "https://github.com/Azurioh/webhook-handler/issues"
   },
   "homepage": "https://github.com/Azurioh/webhook-handler#readme",
-  "workspaces": ["apps/*"],
+  "workspaces": ["apps/*", "packages/*"],
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "typescript": "^5.8.3"

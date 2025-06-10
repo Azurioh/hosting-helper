@@ -20,7 +20,14 @@
     "typescript:check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.9",
     "@webhook-handler/biome-config": "*",
     "@webhook-handler/typescript-config": "*"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.25.57",
+    "zod-openapi": "^4.2.4",
+    "zod-to-json-schema": "^3.24.5"
   }
 }
