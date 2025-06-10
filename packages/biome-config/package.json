@@ -1,0 +1,5 @@
+{
+  "name": "@webhook-handler/biome-config",
+  "version": "1.0.0",
+  "main": "biome.json"
+}
