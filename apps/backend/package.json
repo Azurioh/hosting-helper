@@ -2,6 +2,13 @@
   "name": "webhook-handler-backend",
   "description": "This is the backend for the project",
   "workspaces": ["src/micro-services/*"],
+  "scripts": {
+    "check:all": "biome check . --diagnostic-level=error",
+    "format:check": "biome format . --diagnostic-level=error",
+    "format:fix": "biome format --write .",
+    "lint:check": "biome lint . --diagnostic-level=error",
+    "typescript:check": "tsc --noEmit"
+  },
   "devDependencies": {
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
