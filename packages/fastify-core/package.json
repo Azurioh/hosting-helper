@@ -1,0 +1,10 @@
+{
+  "name": "@webhook-handler/fastify-core",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "devDependencies": {
+    "@webhook-handler/biome-config": "*",
+    "@webhook-handler/typescript-config": "*",
+    "@webhook-handler/fastify-config": "*"
+  }
+}

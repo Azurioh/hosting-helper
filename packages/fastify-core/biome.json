@@ -1,0 +1,6 @@
+{
+  "extends": ["@webhook-handler/biome-config"],
+  "files": {
+    "include": ["**/*.ts"]
+  }
+}
