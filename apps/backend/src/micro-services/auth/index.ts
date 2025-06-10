@@ -1,19 +1,24 @@
-import Fastify from "fastify";
+import { fastify, setupServer } from '@webhook-handler/fastify-core';
+import EnvironmentService from '@webhook-handler/shared/services/environment-service';
 
-const fastify = Fastify({ logger: true });
-
-fastify.get("/", async () => {
-	return { hello: "world (auth)" };
+fastify.get('/', async () => {
+  return { hello: 'world (auth)' };
 });
 
+const PORT = Number.parseInt(EnvironmentService.getInstance<EnvironmentService>().getEnvironment('PORT'), 10);
+
 const start = async () => {
-	try {
-		await fastify.listen({ port: 3000, host: "0.0.0.0" });
-		console.log("Server listening on http://localhost:3000");
-	} catch (err) {
-		fastify.log.error(err);
-		process.exit(1);
-	}
+  setupServer(fastify);
+  try {
+    await fastify.listen({
+      port: PORT,
+      host: '0.0.0.0',
+    });
+    console.log(`Server listening on http://0.0.0.0:${PORT}`);
+  } catch (err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
 };
 
 start();
