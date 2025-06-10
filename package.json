@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A server that helps you keep your website up to date",
   "type": "module",
+  "scripts": {
+    "backend:local": "cd apps/backend && ./docker-local.sh",
+    "backend:prod": "cd apps/backend && ./docker-prod.sh"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Azurioh/webhook-handler.git"
