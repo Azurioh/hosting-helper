@@ -10,6 +10,7 @@ export default abstract class Singleton {
 
   public static getInstance<T extends Singleton>(): T {
     if (!Singleton.instance) {
+      // biome-ignore lint/complexity/noThisInStatic: <explanation>
       new (this as unknown as new () => T)();
     }
     return Singleton.instance as T;
